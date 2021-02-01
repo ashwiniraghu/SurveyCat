@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SurveyMonkeyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Permissions">
+    <Key>
+      <PropertyRef Name="PermID" />
+    </Key>
+    <Property Name="PermID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.QuesDesc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="QuesDesc">
+    <Key>
+      <PropertyRef Name="QAID" />
+      <PropertyRef Name="Order" />
+      <PropertyRef Name="QID" />
+    </Key>
+    <Property Name="QAID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="QID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quesions">
+    <Key>
+      <PropertyRef Name="QID" />
+    </Key>
+    <Property Name="QID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QTypeID" Type="int" Nullable="false" />
+    <Property Name="QText" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Questionnaire">
+    <Key>
+      <PropertyRef Name="QAID" />
+    </Key>
+    <Property Name="QAID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.QuestionProperty' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="QuestionProperty">
+    <Property Name="Property" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="QID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuestionType">
+    <Key>
+      <PropertyRef Name="QTypeID" />
+    </Key>
+    <Property Name="QTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Response">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="startdate" Type="datetime" Nullable="false" />
+    <Property Name="lastupdate" Type="datetime" Nullable="false" />
+    <Property Name="isFinished" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.ResponseDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ResponseDetails">
+    <Key>
+      <PropertyRef Name="RID" />
+      <PropertyRef Name="QID" />
+      <PropertyRef Name="createtime" />
+      <PropertyRef Name="lastupdate" />
+    </Key>
+    <Property Name="RID" Type="int" Nullable="false" />
+    <Property Name="QID" Type="int" Nullable="false" />
+    <Property Name="Answers" Type="nvarchar(max)" />
+    <Property Name="createtime" Type="datetime" Nullable="false" />
+    <Property Name="lastupdate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.RolePerm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RolePerm">
+    <Key>
+      <PropertyRef Name="PermID" />
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="PermID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Survey">
+    <Key>
+      <PropertyRef Name="SID" />
+    </Key>
+    <Property Name="SID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="startdate" Type="date" />
+    <Property Name="enddate" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.SurveyQuestionnaire' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SurveyQuestionnaire">
+    <Key>
+      <PropertyRef Name="SID" />
+      <PropertyRef Name="QAID" />
+    </Key>
+    <Property Name="SID" Type="int" Nullable="false" />
+    <Property Name="QAID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LName" Type="nvarchar" MaxLength="50" />
+    <Property Name="displayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.UserRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_QuesDesc_Quesions">
+    <End Role="Quesions" Type="Self.Quesions" Multiplicity="1" />
+    <End Role="QuesDesc" Type="Self.QuesDesc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quesions">
+        <PropertyRef Name="QID" />
+      </Principal>
+      <Dependent Role="QuesDesc">
+        <PropertyRef Name="QID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuesDesc_Questionnaire">
+    <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
+    <End Role="QuesDesc" Type="Self.QuesDesc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questionnaire">
+        <PropertyRef Name="QAID" />
+      </Principal>
+      <Dependent Role="QuesDesc">
+        <PropertyRef Name="QAID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quesions_QuestionType">
+    <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+    <End Role="Quesions" Type="Self.Quesions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionType">
+        <PropertyRef Name="QTypeID" />
+      </Principal>
+      <Dependent Role="Quesions">
+        <PropertyRef Name="QTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestionProperty_Quesions">
+    <End Role="Quesions" Type="Self.Quesions" Multiplicity="1" />
+    <End Role="QuestionProperty" Type="Self.QuestionProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Quesions">
+        <PropertyRef Name="QID" />
+      </Principal>
+      <Dependent Role="QuestionProperty">
+        <PropertyRef Name="QID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Response_Survey">
+    <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+    <End Role="Response" Type="Self.Response" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Survey">
+        <PropertyRef Name="SID" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="SID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Response_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Response" Type="Self.Response" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResponseDetails_Quesions">
+    <End Role="Quesions" Type="Self.Quesions" Multiplicity="1" />
+    <End Role="ResponseDetails" Type="Self.ResponseDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quesions">
+        <PropertyRef Name="QID" />
+      </Principal>
+      <Dependent Role="ResponseDetails">
+        <PropertyRef Name="QID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResponseDetails_Response">
+    <End Role="Response" Type="Self.Response" Multiplicity="1" />
+    <End Role="ResponseDetails" Type="Self.ResponseDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Response">
+        <PropertyRef Name="RID" />
+      </Principal>
+      <Dependent Role="ResponseDetails">
+        <PropertyRef Name="RID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePerm_Permissions">
+    <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+    <End Role="RolePerm" Type="Self.RolePerm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permissions">
+        <PropertyRef Name="PermID" />
+      </Principal>
+      <Dependent Role="RolePerm">
+        <PropertyRef Name="PermID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePerm_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RolePerm" Type="Self.RolePerm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RolePerm">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyQuestionnaire_Questionnaire">
+    <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
+    <End Role="SurveyQuestionnaire" Type="Self.SurveyQuestionnaire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questionnaire">
+        <PropertyRef Name="QAID" />
+      </Principal>
+      <Dependent Role="SurveyQuestionnaire">
+        <PropertyRef Name="QAID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SurveyQuestionnaire_Survey">
+    <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+    <End Role="SurveyQuestionnaire" Type="Self.SurveyQuestionnaire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Survey">
+        <PropertyRef Name="SID" />
+      </Principal>
+      <Dependent Role="SurveyQuestionnaire">
+        <PropertyRef Name="SID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SurveyMonkeyModelStoreContainer">
+    <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quesions" EntityType="Self.Quesions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Questionnaire" EntityType="Self.Questionnaire" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Survey" EntityType="Self.Survey" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuesDesc" EntityType="Self.QuesDesc" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [QuesDesc].[QAID] AS [QAID], 
+    [QuesDesc].[Order] AS [Order], 
+    [QuesDesc].[QID] AS [QID]
+    FROM [dbo].[QuesDesc] AS [QuesDesc]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="QuestionProperty" EntityType="Self.QuestionProperty" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [QuestionProperty].[Property] AS [Property], 
+    [QuestionProperty].[QID] AS [QID]
+    FROM [dbo].[QuestionProperty] AS [QuestionProperty]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ResponseDetails" EntityType="Self.ResponseDetails" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ResponseDetails].[RID] AS [RID], 
+    [ResponseDetails].[QID] AS [QID], 
+    [ResponseDetails].[Answers] AS [Answers], 
+    [ResponseDetails].[createtime] AS [createtime], 
+    [ResponseDetails].[lastupdate] AS [lastupdate]
+    FROM [dbo].[ResponseDetails] AS [ResponseDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RolePerm" EntityType="Self.RolePerm" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RolePerm].[PermID] AS [PermID], 
+    [RolePerm].[RoleID] AS [RoleID]
+    FROM [dbo].[RolePerm] AS [RolePerm]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SurveyQuestionnaire" EntityType="Self.SurveyQuestionnaire" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SurveyQuestionnaire].[SID] AS [SID], 
+    [SurveyQuestionnaire].[QAID] AS [QAID]
+    FROM [dbo].[SurveyQuestionnaire] AS [SurveyQuestionnaire]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UserRole].[UserID] AS [UserID], 
+    [UserRole].[RoleID] AS [RoleID], 
+    [UserRole].[Active] AS [Active]
+    FROM [dbo].[UserRole] AS [UserRole]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_QuesDesc_Quesions" Association="Self.FK_QuesDesc_Quesions">
+      <End Role="Quesions" EntitySet="Quesions" />
+      <End Role="QuesDesc" EntitySet="QuesDesc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuesDesc_Questionnaire" Association="Self.FK_QuesDesc_Questionnaire">
+      <End Role="Questionnaire" EntitySet="Questionnaire" />
+      <End Role="QuesDesc" EntitySet="QuesDesc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quesions_QuestionType" Association="Self.FK_Quesions_QuestionType">
+      <End Role="QuestionType" EntitySet="QuestionType" />
+      <End Role="Quesions" EntitySet="Quesions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestionProperty_Quesions" Association="Self.FK_QuestionProperty_Quesions">
+      <End Role="Quesions" EntitySet="Quesions" />
+      <End Role="QuestionProperty" EntitySet="QuestionProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Response_Survey" Association="Self.FK_Response_Survey">
+      <End Role="Survey" EntitySet="Survey" />
+      <End Role="Response" EntitySet="Response" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Response_User" Association="Self.FK_Response_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Response" EntitySet="Response" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResponseDetails_Quesions" Association="Self.FK_ResponseDetails_Quesions">
+      <End Role="Quesions" EntitySet="Quesions" />
+      <End Role="ResponseDetails" EntitySet="ResponseDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResponseDetails_Response" Association="Self.FK_ResponseDetails_Response">
+      <End Role="Response" EntitySet="Response" />
+      <End Role="ResponseDetails" EntitySet="ResponseDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePerm_Permissions" Association="Self.FK_RolePerm_Permissions">
+      <End Role="Permissions" EntitySet="Permissions" />
+      <End Role="RolePerm" EntitySet="RolePerm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePerm_Role" Association="Self.FK_RolePerm_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="RolePerm" EntitySet="RolePerm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyQuestionnaire_Questionnaire" Association="Self.FK_SurveyQuestionnaire_Questionnaire">
+      <End Role="Questionnaire" EntitySet="Questionnaire" />
+      <End Role="SurveyQuestionnaire" EntitySet="SurveyQuestionnaire" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SurveyQuestionnaire_Survey" Association="Self.FK_SurveyQuestionnaire_Survey">
+      <End Role="Survey" EntitySet="Survey" />
+      <End Role="SurveyQuestionnaire" EntitySet="SurveyQuestionnaire" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

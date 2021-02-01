@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SurveyMonkeyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="PermID" />
+          </Key>
+          <Property Name="PermID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.QuesDesc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="QuesDesc">
+          <Key>
+            <PropertyRef Name="QAID" />
+            <PropertyRef Name="Order" />
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QAID" Type="int" Nullable="false" />
+          <Property Name="Order" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quesions">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QTypeID" Type="int" Nullable="false" />
+          <Property Name="QText" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questionnaire">
+          <Key>
+            <PropertyRef Name="QAID" />
+          </Key>
+          <Property Name="QAID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.QuestionProperty' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="QuestionProperty">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="Property" Type="nvarchar(max)" />
+          <Property Name="QID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="QTypeID" />
+          </Key>
+          <Property Name="QTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="startdate" Type="datetime" Nullable="false" />
+          <Property Name="lastupdate" Type="datetime" Nullable="false" />
+          <Property Name="isFinished" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.ResponseDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ResponseDetails">
+          <Key>
+            <PropertyRef Name="RID" />
+            <PropertyRef Name="QID" />
+            <PropertyRef Name="createtime" />
+            <PropertyRef Name="lastupdate" />
+          </Key>
+          <Property Name="RID" Type="int" Nullable="false" />
+          <Property Name="QID" Type="int" Nullable="false" />
+          <Property Name="Answers" Type="nvarchar(max)" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="lastupdate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.RolePerm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RolePerm">
+          <Key>
+            <PropertyRef Name="PermID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="PermID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="startdate" Type="date" />
+          <Property Name="enddate" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.SurveyQuestionnaire' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SurveyQuestionnaire">
+          <Key>
+            <PropertyRef Name="SID" />
+            <PropertyRef Name="QAID" />
+          </Key>
+          <Property Name="SID" Type="int" Nullable="false" />
+          <Property Name="QAID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LName" Type="nvarchar" MaxLength="50" />
+          <Property Name="displayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SurveyMonkey.dbo.UserRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_QuesDesc_Quesions">
+          <End Role="Quesions" Type="Self.Quesions" Multiplicity="1" />
+          <End Role="QuesDesc" Type="Self.QuesDesc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quesions">
+              <PropertyRef Name="QID" />
+            </Principal>
+            <Dependent Role="QuesDesc">
+              <PropertyRef Name="QID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuesDesc_Questionnaire">
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
+          <End Role="QuesDesc" Type="Self.QuesDesc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaire">
+              <PropertyRef Name="QAID" />
+            </Principal>
+            <Dependent Role="QuesDesc">
+              <PropertyRef Name="QAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quesions_QuestionType">
+          <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+          <End Role="Quesions" Type="Self.Quesions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="QTypeID" />
+            </Principal>
+            <Dependent Role="Quesions">
+              <PropertyRef Name="QTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionProperty_Quesions">
+          <End Role="Quesions" Type="Self.Quesions" Multiplicity="1" />
+          <End Role="QuestionProperty" Type="Self.QuestionProperty" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Quesions">
+              <PropertyRef Name="QID" />
+            </Principal>
+            <Dependent Role="QuestionProperty">
+              <PropertyRef Name="QID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Survey">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponseDetails_Quesions">
+          <End Role="Quesions" Type="Self.Quesions" Multiplicity="1" />
+          <End Role="ResponseDetails" Type="Self.ResponseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quesions">
+              <PropertyRef Name="QID" />
+            </Principal>
+            <Dependent Role="ResponseDetails">
+              <PropertyRef Name="QID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponseDetails_Response">
+          <End Role="Response" Type="Self.Response" Multiplicity="1" />
+          <End Role="ResponseDetails" Type="Self.ResponseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Response">
+              <PropertyRef Name="RID" />
+            </Principal>
+            <Dependent Role="ResponseDetails">
+              <PropertyRef Name="RID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePerm_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="RolePerm" Type="Self.RolePerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermID" />
+            </Principal>
+            <Dependent Role="RolePerm">
+              <PropertyRef Name="PermID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePerm_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="RolePerm" Type="Self.RolePerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RolePerm">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionnaire_Questionnaire">
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
+          <End Role="SurveyQuestionnaire" Type="Self.SurveyQuestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaire">
+              <PropertyRef Name="QAID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionnaire">
+              <PropertyRef Name="QAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionnaire_Survey">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="SurveyQuestionnaire" Type="Self.SurveyQuestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionnaire">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SurveyMonkeyModelStoreContainer">
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quesions" EntityType="Self.Quesions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questionnaire" EntityType="Self.Questionnaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Survey" EntityType="Self.Survey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuesDesc" EntityType="Self.QuesDesc" store:Type="Tables" Schema="dbo">
+            
+          </EntitySet>
+          <EntitySet Name="QuestionProperty" EntityType="Self.QuestionProperty" store:Type="Tables" Schema="dbo">
+          
+          </EntitySet>
+          <EntitySet Name="ResponseDetails" EntityType="Self.ResponseDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ResponseDetails].[RID] AS [RID], 
+    [ResponseDetails].[QID] AS [QID], 
+    [ResponseDetails].[Answers] AS [Answers], 
+    [ResponseDetails].[createtime] AS [createtime], 
+    [ResponseDetails].[lastupdate] AS [lastupdate]
+    FROM [dbo].[ResponseDetails] AS [ResponseDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RolePerm" EntityType="Self.RolePerm" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RolePerm].[PermID] AS [PermID], 
+    [RolePerm].[RoleID] AS [RoleID]
+    FROM [dbo].[RolePerm] AS [RolePerm]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SurveyQuestionnaire" EntityType="Self.SurveyQuestionnaire" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SurveyQuestionnaire].[SID] AS [SID], 
+    [SurveyQuestionnaire].[QAID] AS [QAID]
+    FROM [dbo].[SurveyQuestionnaire] AS [SurveyQuestionnaire]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" store:Type="Tables" Schema="dbo">
+          
+          </EntitySet>
+          <AssociationSet Name="FK_QuesDesc_Quesions" Association="Self.FK_QuesDesc_Quesions">
+            <End Role="Quesions" EntitySet="Quesions" />
+            <End Role="QuesDesc" EntitySet="QuesDesc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuesDesc_Questionnaire" Association="Self.FK_QuesDesc_Questionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+            <End Role="QuesDesc" EntitySet="QuesDesc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quesions_QuestionType" Association="Self.FK_Quesions_QuestionType">
+            <End Role="QuestionType" EntitySet="QuestionType" />
+            <End Role="Quesions" EntitySet="Quesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionProperty_Quesions" Association="Self.FK_QuestionProperty_Quesions">
+            <End Role="Quesions" EntitySet="Quesions" />
+            <End Role="QuestionProperty" EntitySet="QuestionProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Survey" Association="Self.FK_Response_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_User" Association="Self.FK_Response_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponseDetails_Quesions" Association="Self.FK_ResponseDetails_Quesions">
+            <End Role="Quesions" EntitySet="Quesions" />
+            <End Role="ResponseDetails" EntitySet="ResponseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponseDetails_Response" Association="Self.FK_ResponseDetails_Response">
+            <End Role="Response" EntitySet="Response" />
+            <End Role="ResponseDetails" EntitySet="ResponseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePerm_Permissions" Association="Self.FK_RolePerm_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="RolePerm" EntitySet="RolePerm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePerm_Role" Association="Self.FK_RolePerm_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RolePerm" EntitySet="RolePerm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionnaire_Questionnaire" Association="Self.FK_SurveyQuestionnaire_Questionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaire" />
+            <End Role="SurveyQuestionnaire" EntitySet="SurveyQuestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionnaire_Survey" Association="Self.FK_SurveyQuestionnaire_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="SurveyQuestionnaire" EntitySet="SurveyQuestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SurveyMonkeyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="PermID" />
+          </Key>
+          <Property Name="PermID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Roles" Relationship="Self.RolePerm" FromRole="Permissions" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Quesion">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QTypeID" Type="Int32" Nullable="false" />
+          <Property Name="QText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="QuesDescs" Relationship="Self.FK_QuesDesc_Quesions" FromRole="Quesions" ToRole="QuesDesc" />
+          <NavigationProperty Name="QuestionType" Relationship="Self.FK_Quesions_QuestionType" FromRole="Quesions" ToRole="QuestionType" />
+          <NavigationProperty Name="QuestionProperty" Relationship="Self.FK_QuestionProperty_Quesions" FromRole="Quesions" ToRole="QuestionProperty" />
+          <NavigationProperty Name="ResponseDetails" Relationship="Self.FK_ResponseDetails_Quesions" FromRole="Quesions" ToRole="ResponseDetails" />
+        </EntityType>
+        <EntityType Name="Questionnaire">
+          <Key>
+            <PropertyRef Name="QAID" />
+          </Key>
+          <Property Name="QAID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="QuesDescs" Relationship="Self.FK_QuesDesc_Questionnaire" FromRole="Questionnaire" ToRole="QuesDesc" />
+          <NavigationProperty Name="Surveys" Relationship="Self.SurveyQuestionnaire" FromRole="Questionnaire" ToRole="Survey" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="QTypeID" />
+          </Key>
+          <Property Name="QTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Quesions" Relationship="Self.FK_Quesions_QuestionType" FromRole="QuestionType" ToRole="Quesions" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="startdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lastupdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isFinished" Type="Boolean" />
+          <NavigationProperty Name="Survey" Relationship="Self.FK_Response_Survey" FromRole="Response" ToRole="Survey" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Response_User" FromRole="Response" ToRole="User" />
+          <NavigationProperty Name="ResponseDetails" Relationship="Self.FK_ResponseDetails_Response" FromRole="Response" ToRole="ResponseDetails" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+          <NavigationProperty Name="Permissions" Relationship="Self.RolePerm" FromRole="Role" ToRole="Permissions" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="startdate" Type="DateTime" Precision="0" />
+          <Property Name="enddate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Responses" Relationship="Self.FK_Response_Survey" FromRole="Survey" ToRole="Response" />
+          <NavigationProperty Name="Questionnaires" Relationship="Self.SurveyQuestionnaire" FromRole="Survey" ToRole="Questionnaire" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="displayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Responses" Relationship="Self.FK_Response_User" FromRole="User" ToRole="Response" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="QuesDesc">
+          <Key>
+            <PropertyRef Name="QAID" />
+            <PropertyRef Name="Order" />
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QAID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Quesion" Relationship="Self.FK_QuesDesc_Quesions" FromRole="QuesDesc" ToRole="Quesions" />
+          <NavigationProperty Name="Questionnaire" Relationship="Self.FK_QuesDesc_Questionnaire" FromRole="QuesDesc" ToRole="Questionnaire" />
+        </EntityType>
+        <EntityType Name="QuestionProperty">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="Property" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Quesion" Relationship="Self.FK_QuestionProperty_Quesions" FromRole="QuestionProperty" ToRole="Quesions" />
+        </EntityType>
+        <EntityType Name="ResponseDetail">
+          <Key>
+            <PropertyRef Name="RID" />
+            <PropertyRef Name="QID" />
+            <PropertyRef Name="createtime" />
+            <PropertyRef Name="lastupdate" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" />
+          <Property Name="QID" Type="Int32" Nullable="false" />
+          <Property Name="Answers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="lastupdate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Quesion" Relationship="Self.FK_ResponseDetails_Quesions" FromRole="ResponseDetails" ToRole="Quesions" />
+          <NavigationProperty Name="Response" Relationship="Self.FK_ResponseDetails_Response" FromRole="ResponseDetails" ToRole="Response" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_QuesDesc_Quesions">
+          <End Role="Quesions" Type="Self.Quesion" Multiplicity="1" />
+          <End Role="QuesDesc" Type="Self.QuesDesc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quesions">
+              <PropertyRef Name="QID" />
+            </Principal>
+            <Dependent Role="QuesDesc">
+              <PropertyRef Name="QID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quesions_QuestionType">
+          <End Role="QuestionType" Type="Self.QuestionType" Multiplicity="1" />
+          <End Role="Quesions" Type="Self.Quesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="QTypeID" />
+            </Principal>
+            <Dependent Role="Quesions">
+              <PropertyRef Name="QTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionProperty_Quesions">
+          <End Role="Quesions" Type="Self.Quesion" Multiplicity="1" />
+          <End Role="QuestionProperty" Type="Self.QuestionProperty" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Quesions">
+              <PropertyRef Name="QID" />
+            </Principal>
+            <Dependent Role="QuestionProperty">
+              <PropertyRef Name="QID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponseDetails_Quesions">
+          <End Role="Quesions" Type="Self.Quesion" Multiplicity="1" />
+          <End Role="ResponseDetails" Type="Self.ResponseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quesions">
+              <PropertyRef Name="QID" />
+            </Principal>
+            <Dependent Role="ResponseDetails">
+              <PropertyRef Name="QID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuesDesc_Questionnaire">
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="1" />
+          <End Role="QuesDesc" Type="Self.QuesDesc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questionnaire">
+              <PropertyRef Name="QAID" />
+            </Principal>
+            <Dependent Role="QuesDesc">
+              <PropertyRef Name="QAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Survey">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponseDetails_Response">
+          <End Role="Response" Type="Self.Response" Multiplicity="1" />
+          <End Role="ResponseDetails" Type="Self.ResponseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Response">
+              <PropertyRef Name="RID" />
+            </Principal>
+            <Dependent Role="ResponseDetails">
+              <PropertyRef Name="RID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RolePerm">
+          <End Role="Permissions" Type="Self.Permission" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+        </Association>
+        <Association Name="SurveyQuestionnaire">
+          <End Role="Questionnaire" Type="Self.Questionnaire" Multiplicity="*" />
+          <End Role="Survey" Type="Self.Survey" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SurveyMonkeyEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="Quesions" EntityType="Self.Quesion" />
+          <EntitySet Name="Questionnaires" EntityType="Self.Questionnaire" />
+          <EntitySet Name="QuestionTypes" EntityType="Self.QuestionType" />
+          <EntitySet Name="Responses" EntityType="Self.Response" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Surveys" EntityType="Self.Survey" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="QuesDescs" EntityType="Self.QuesDesc" />
+          <EntitySet Name="QuestionProperties" EntityType="Self.QuestionProperty" />
+          <EntitySet Name="ResponseDetails" EntityType="Self.ResponseDetail" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <AssociationSet Name="FK_QuesDesc_Quesions" Association="Self.FK_QuesDesc_Quesions">
+            <End Role="Quesions" EntitySet="Quesions" />
+            <End Role="QuesDesc" EntitySet="QuesDescs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quesions_QuestionType" Association="Self.FK_Quesions_QuestionType">
+            <End Role="QuestionType" EntitySet="QuestionTypes" />
+            <End Role="Quesions" EntitySet="Quesions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionProperty_Quesions" Association="Self.FK_QuestionProperty_Quesions">
+            <End Role="Quesions" EntitySet="Quesions" />
+            <End Role="QuestionProperty" EntitySet="QuestionProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponseDetails_Quesions" Association="Self.FK_ResponseDetails_Quesions">
+            <End Role="Quesions" EntitySet="Quesions" />
+            <End Role="ResponseDetails" EntitySet="ResponseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuesDesc_Questionnaire" Association="Self.FK_QuesDesc_Questionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaires" />
+            <End Role="QuesDesc" EntitySet="QuesDescs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Survey" Association="Self.FK_Response_Survey">
+            <End Role="Survey" EntitySet="Surveys" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_User" Association="Self.FK_Response_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponseDetails_Response" Association="Self.FK_ResponseDetails_Response">
+            <End Role="Response" EntitySet="Responses" />
+            <End Role="ResponseDetails" EntitySet="ResponseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="RolePerm" Association="Self.RolePerm">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="SurveyQuestionnaire" Association="Self.SurveyQuestionnaire">
+            <End Role="Questionnaire" EntitySet="Questionnaires" />
+            <End Role="Survey" EntitySet="Surveys" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SurveyMonkeyModelStoreContainer" CdmEntityContainer="SurveyMonkeyEntities1">
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="PermID" ColumnName="PermID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quesions">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.Quesion">
+              <MappingFragment StoreEntitySet="Quesions">
+                <ScalarProperty Name="QID" ColumnName="QID" />
+                <ScalarProperty Name="QTypeID" ColumnName="QTypeID" />
+                <ScalarProperty Name="QText" ColumnName="QText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questionnaires">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.Questionnaire">
+              <MappingFragment StoreEntitySet="Questionnaire">
+                <ScalarProperty Name="QAID" ColumnName="QAID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionTypes">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.QuestionType">
+              <MappingFragment StoreEntitySet="QuestionType">
+                <ScalarProperty Name="QTypeID" ColumnName="QTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+                <ScalarProperty Name="isFinished" ColumnName="isFinished" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surveys">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.Survey">
+              <MappingFragment StoreEntitySet="Survey">
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="displayName" ColumnName="displayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuesDescs">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.QuesDesc">
+              <MappingFragment StoreEntitySet="QuesDesc">
+                <ScalarProperty Name="QAID" ColumnName="QAID" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="QID" ColumnName="QID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionProperties">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.QuestionProperty">
+              <MappingFragment StoreEntitySet="QuestionProperty">
+                <ScalarProperty Name="Property" ColumnName="Property" />
+                <ScalarProperty Name="QID" ColumnName="QID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResponseDetails">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.ResponseDetail">
+              <MappingFragment StoreEntitySet="ResponseDetails">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="QID" ColumnName="QID" />
+                <ScalarProperty Name="Answers" ColumnName="Answers" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="SurveyMonkeyModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RolePerm" TypeName="SurveyMonkeyModel.RolePerm" StoreEntitySet="RolePerm">
+            <EndProperty Name="Permissions">
+              <ScalarProperty Name="PermID" ColumnName="PermID" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SurveyQuestionnaire" TypeName="SurveyMonkeyModel.SurveyQuestionnaire" StoreEntitySet="SurveyQuestionnaire">
+            <EndProperty Name="Questionnaire">
+              <ScalarProperty Name="QAID" ColumnName="QAID" />
+            </EndProperty>
+            <EndProperty Name="Survey">
+              <ScalarProperty Name="SID" ColumnName="SID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9e963cbfd0d548eab8164c4403f42415" Name="Diagram1">
+        <EntityTypeShape EntityType="SurveyMonkeyModel.Permission" Width="1.5" PointX="1.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.Quesion" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.Questionnaire" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.QuestionType" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.Response" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.Role" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.Survey" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.User" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.QuesDesc" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.QuestionProperty" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.ResponseDetail" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SurveyMonkeyModel.UserRole" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_QuesDesc_Quesions" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_Quesions_QuestionType" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_QuestionProperty_Quesions" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_ResponseDetails_Quesions" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_QuesDesc_Questionnaire" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_Response_Survey" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_Response_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_ResponseDetails_Response" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_UserRole_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.FK_UserRole_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.RolePerm" ManuallyRouted="false" />
+        <AssociationConnector Association="SurveyMonkeyModel.SurveyQuestionnaire" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

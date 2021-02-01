@@ -1,0 +1,126 @@
+﻿@model SurveyCat.Models.User
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        /*#login-div {
+            position: absolute;
+            left: 40%;
+            top: 40%;
+            border: 1px solid #0026ff;
+            padding: 10px 10px;
+        }*/
+
+        .field-validation-valid {
+            color: red;
+        }
+    </style>
+</head>
+
+ 
+        @*using (@Html.BeginForm("Login", "Home", FormMethod.Post))*@
+       
+<div class="panel panel-body">
+    <div class="col-md-3">
+        <div class="thumbnail">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Director Message</h3>
+                </div>
+            </div>
+            <img src="~/Content/Images/rocket-ship-logoa.jpg" alt="..." style="margin-top:-20px">
+            <div class="caption">
+                <h3>Ashwini Holla</h3>
+                <p>&para; Have faith in us, We will build the best survey tool for you and we provide full satisfaction by providing best service. &para;</p>
+                <p><a href="#" class="btn btn-primary" role="button">See more</a> </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+
+        <form id="myForm">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <h4>Login Here</h4>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.Login, new { @class = "form-control", @placeholder = "Login" })
+                    @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <a href="#" class="btn btn-primary " onclick="LoginUser()">Submit</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+  
+
+<script>
+
+    var LoginUser = function () {
+        
+        var data = $("#myForm").serialize();
+        if (!$("#myForm").valid()) {
+
+            return false;
+        }
+        $.ajax({
+            type: "Post",
+            url: "/Home/Login",
+            data: data,
+            success: function (response) {
+                debugger
+                if (response == "fail") {
+
+                    window.location.href = "/Home/Login";
+                }
+                else if (response == "Admin") {
+
+                    window.location.href = "/QuestionBank/Index";
+                }
+                //else {
+
+                //    window.location.href = "/Test/Index";
+                //}
+            }
+
+
+
+        })
+
+
+
+    }
+
+</script>
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

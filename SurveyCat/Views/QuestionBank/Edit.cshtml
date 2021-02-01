@@ -1,0 +1,121 @@
+﻿@model SurveyCat.Models.Quesion
+
+@{
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Home/Login");
+    }
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#QTypeID").change(function () {
+            //var x = document.getElementById("qType").value;
+            var a = $("#QTypeID option:Selected").text();
+            //alert(a);
+            if (a.trim() == "Text".trim())
+            {
+                document.getElementById("questionProperty").style.visibility = 'hidden';
+                //alert("hidden");
+
+            }
+            else if (a.trim() == "Text Long".trim())
+            {
+                document.getElementById("questionProperty").style.visibility = 'hidden';
+                //alert("hidden");
+            }
+            else {
+                document.getElementById("questionProperty").style.visibility = 'visible';
+                //alert("visible");
+            }
+        });
+        $("#saveBtn").click(function () {
+            var g = $("#QuestionProperty_Property").val();
+            alert(g);
+            var a = $("#QTypeID option:Selected").text();
+            alert(a);
+            //if (a.trim() == "Check Box")
+            //if (a.trim() == "Radio Button")
+            if (a.trim() == "Radio Button - 3") {
+                var y = g.split
+                alert(y.length);
+                if (y.length < "3") {
+                    //document.getElementById("qPropertyValidation").style.visibility = 'visible';
+                    $("#qPropertyValidation").text("Please enter 3 comma seperated property")
+
+                }
+            }
+            if (a.trim() == "Radio Button - 5") {
+                var y = g.split(',');
+                if (y.length < 5)
+                    $("#qPropertyValidation").text("Please enter 5 comma seperated property")
+            }
+            if (a.trim() == "Check Box - 5") {
+                var y = g.split(',');
+                if (y.length < 5)
+                    $("#qPropertyValidation").text("Please enter 5 comma seperated property")
+            }
+            if (a.trim() == "Check Box - 3") {
+                var y = g.split(',');
+                if (y.length < 3)
+                    $("#qPropertyValidation").text("Please enter 3 comma seperated property")
+            }
+
+
+        })
+    });
+</script>
+<h4>Edit Questions</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.QID)
+    @Html.HiddenFor(model => model.QuestionProperty.QID)
+    <div class="form-group">
+        @Html.LabelFor(model => model.QText, "Question", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.QText, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.QText, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.QuestionType.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.QTypeID, ViewBag.QuestionType as SelectList, "--select--", new { @class = "form-control" })
+            @* @Html.DropDownList("QType", ViewBag.QuestionType as SelectList, "select")*@
+            @Html.ValidationMessageFor(model => model.QTypeID, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group" id="questionProperty">
+        @Html.LabelFor(model => model.QuestionProperty.Property, "QProperty", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.QuestionProperty.Property, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.QuestionProperty.Property, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

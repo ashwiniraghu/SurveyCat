@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SurveyMonkeyModelStoreContainer" CdmEntityContainer="SurveyMonkeyEntities1">
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.Permission">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="PermID" ColumnName="PermID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quesions">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.Quesion">
+        <MappingFragment StoreEntitySet="Quesions">
+          <ScalarProperty Name="QID" ColumnName="QID" />
+          <ScalarProperty Name="QTypeID" ColumnName="QTypeID" />
+          <ScalarProperty Name="QText" ColumnName="QText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questionnaires">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.Questionnaire">
+        <MappingFragment StoreEntitySet="Questionnaire">
+          <ScalarProperty Name="QAID" ColumnName="QAID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionTypes">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.QuestionType">
+        <MappingFragment StoreEntitySet="QuestionType">
+          <ScalarProperty Name="QTypeID" ColumnName="QTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responses">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.Response">
+        <MappingFragment StoreEntitySet="Response">
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="SID" ColumnName="SID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+          <ScalarProperty Name="isFinished" ColumnName="isFinished" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Surveys">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.Survey">
+        <MappingFragment StoreEntitySet="Survey">
+          <ScalarProperty Name="SID" ColumnName="SID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="displayName" ColumnName="displayName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuesDescs">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.QuesDesc">
+        <MappingFragment StoreEntitySet="QuesDesc">
+          <ScalarProperty Name="QAID" ColumnName="QAID" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="QID" ColumnName="QID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestionProperties">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.QuestionProperty">
+        <MappingFragment StoreEntitySet="QuestionProperty">
+          <ScalarProperty Name="Property" ColumnName="Property" />
+          <ScalarProperty Name="QID" ColumnName="QID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResponseDetails">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.ResponseDetail">
+        <MappingFragment StoreEntitySet="ResponseDetails">
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="QID" ColumnName="QID" />
+          <ScalarProperty Name="Answers" ColumnName="Answers" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="lastupdate" ColumnName="lastupdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="SurveyMonkeyModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RolePerm" TypeName="SurveyMonkeyModel.RolePerm" StoreEntitySet="RolePerm">
+      <EndProperty Name="Permissions">
+        <ScalarProperty Name="PermID" ColumnName="PermID" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SurveyQuestionnaire" TypeName="SurveyMonkeyModel.SurveyQuestionnaire" StoreEntitySet="SurveyQuestionnaire">
+      <EndProperty Name="Questionnaire">
+        <ScalarProperty Name="QAID" ColumnName="QAID" />
+      </EndProperty>
+      <EndProperty Name="Survey">
+        <ScalarProperty Name="SID" ColumnName="SID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SurveyCat.Models.Questionnaire>
+
+@{
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Home/Login");
+    }
+}
+
+@*<h2>Index</h2>*@
+
+@*<hr />*@
+<div class="panel panel-default">
+    <div class="panel-heading clearfix">
+        <div class="btn-group pull-right">
+            @using (Html.BeginForm("AddQuestionnaire", "Questionare", FormMethod.Get))
+            {
+
+                <input type="submit" value="Add" class="btn btn-success" />
+                //<button value="submit" name="Submit" class="btn btn-success">Submit</button>
+                <input type="submit" value="Archive" class="btn btn-success" />
+
+            }
+        </div>
+    </div>
+    @*<hr />*@
+    <div class="panel panel-body">
+        <table class="table table-striped" >
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Edit", new { id = item.QAID }, new { @class = "glyphicon glyphicon-edit" })
+                        @*@Html.ActionLink("Details", "Details", new { id=item.QAID }) |*@
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.QAID })*@
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+    </div>

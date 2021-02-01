@@ -1,0 +1,246 @@
+﻿@model SurveyCat.Models.QQViewModel
+
+@{
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Home/Login");
+    }
+    WebGrid grid = new WebGrid(Model.questions, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+    WebGrid selectedGrid = new WebGrid(Model.selectedQuestions, canPage: true, rowsPerPage: 10);
+    grid.Pager(WebGridPagerModes.All);
+    int rowNumber = 0;
+    int rowNumber1 = 0;
+}
+<script>
+  //Use LocalStorage concept for this to work
+    //    window.onload = function () {
+    //        document.getElementById("content1").style.visibility = 'hidden';
+    //        document.getElementById("assignBtn").style.visibility = 'hidden';
+    //    };
+    //$(document).ready(function () {
+    //    $("#addBtn").click(function () {
+    //        document.getElementById("content1").style.display = 'visible';
+    //        document.getElementById("assignBtn").style.visibility = 'visible';
+    //    })
+    //});
+</script>
+<style type="text/css">
+    /*Here we will add css for style webgrid*/
+    * {
+        box-sizing: border-box;
+    }
+
+    [class*="col-"] {
+        float: left;
+        padding: 15px;
+    }
+
+    .col-1 {
+        width: 8.33%;
+    }
+
+    .col-2 {
+        width: 16.66%;
+    }
+
+    .col-3 {
+        width: 25%;
+    }
+
+    .col-4 {
+        width: 33.33%;
+    }
+
+    .col-5 {
+        width: 41.66%;
+    }
+
+    .col-6 {
+        width: 50%;
+    }
+
+    .col-7 {
+        width: 58.33%;
+    }
+
+    .col-8 {
+        width: 66.66%;
+    }
+
+    .col-9 {
+        width: 75%;
+    }
+
+    .col-10 {
+        width: 83.33%;
+    }
+
+    .col-11 {
+        width: 91.66%;
+    }
+
+    .col-12 {
+        width: 100%;
+    }
+
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+    .webgrid-table1 {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #98BF21;
+        background-color: white;
+    }
+
+        .webgrid-table1 td, th {
+            border: 1px solid #98BF21;
+            padding: 3px 7px 2px;
+        }
+    .webgrid-header {
+        background-color: #A7C942;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-table thead td:last-child,
+    .webgrid-table thead th:last-child,
+    .webgrid-table tbody td:last-child,
+    .webgrid-table tbody th:last-child {
+        display: none;
+    }
+    .webgrid-table1 thead td:last-child,
+    .webgrid-table1 thead th:last-child,
+    .webgrid-table1 tbody td:last-child,
+    .webgrid-table1 tbody th:last-child {
+        display: none;
+    }
+</style>
+<h4>AddQuestionnaire</h4>
+<hr />
+
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.questionnaire.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.questionnaire.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.questionnaire.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.questionnaire.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.questionnaire.Comment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.questionnaire.Comment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h4><small>Assign questions to preview</small></h4>
+        </div>
+        <div class="panel panel-body">
+            <div id="questions" class="webgrid-alternating-row">
+                @grid.GetHtml(
+            tableStyle: "webgrid-table",
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-row-style",
+            rowStyle: "webgrid-alternating-row",
+            columns: grid.Columns(
+                       grid.Column("Serial No", format:item => rowNumber = rowNumber + 1),
+                grid.Column("Question", format:(item) => Html.TextBox("questions[" +(rowNumber-1).ToString()+"].QText", (object)item.QText)),
+                grid.Column(columnName:"Add", format:@<text><input type="checkbox" name="ids" value="@item.QID" /></text>),
+                                       grid.Column("Id", format: (item) => Html.TextBox("questions[" + (rowNumber - 1).ToString() + "].QID", (object)item.QID))
+
+                                                 ))
+
+            </div>
+            </div>
+        <div class="panel-footer clearfix">
+            <div id="assignBtn">
+                <div>
+                    <input type="submit" value="Add" class="btn btn-success pull-right" id="addBtn" formmethod="post" formaction="SelectQuestions" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4><small>Add questions to Questionnaire</small></h4>
+        </div>
+        <div class="panel panel-body clearfix">
+            <div id="selectedQuestions">
+                @selectedGrid.GetHtml(
+            tableStyle: "webgrid-table1",
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-row-style",
+            rowStyle: "webgrid-alternating-row",
+            columns: grid.Columns(
+                grid.Column("Serial No", format: item => rowNumber1 = rowNumber1 + 1),
+                grid.Column("Question", format: (item) => Html.TextBox("selectedQuestions[" + (rowNumber1 - 1).ToString() + "].QText", (object)item.QText)),
+                grid.Column("Id", format: (item) => Html.TextBox("selectedQuestions[" + (rowNumber1 - 1).ToString() + "].QID", (object)item.QID))
+                                                                                                    ))
+
+            </div>
+            </div>
+            <div class="panel-footer clearfix">
+                <div>
+                    <div>
+                        <input type="submit" value="Assign" class="btn btn-success pull-right" formmethod="post" formaction="Assign" />
+                    </div>
+                </div>
+             </div>
+            </div>
+        </div>
+    }
+
+    <div class="col-3">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

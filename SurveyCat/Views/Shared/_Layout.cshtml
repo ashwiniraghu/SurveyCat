@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        @*<nav class="navbar navbar-inverse navbar-fixed-top" style="color:chartreuse">*@
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img alt="Brand" src="~/Content/Images/rocket-ship-logoa.jpg" height="40" width="40">
+                    </a>
+                    @*@Html.Label("Welcome to SurveyCat")*@
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="@Url.Action("Logout", "Home")">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="panel-body">
+            @RenderBody()
+            @*<hr />*@
+            @*<footer class="col-md-12">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>*@
+        </div>
+
+        <div class="well" style="background-color:#808080;color:wheat;margin-bottom:0px">
+
+            <div class="col-lg-4" style="margin-left:20px">
+
+                <h3><span class="glyphicon glyphicon-map-marker"></span> Address</h3>
+                <ul class="list-group list-unstyled">
+
+                    <li>Survey Builder.</li>
+                    <li>123,madilu,13th cross</li>
+                    <li>Pavamananagar, Gottigere,560083</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4">
+
+                <h3><span class="glyphicon glyphicon-cog"></span> Our Services</h3>
+                <ul class="list-group list-unstyled">
+
+                    <li><span class="glyphicon glyphicon-music"></span> <a href="#">Musical & Dance Traning</a> </li>
+                    <li><span class="glyphicon glyphicon-book"></span>    <a href="#">Training in Asp.Net,Java,android etc.</a></li>
+                    <li><span class="glyphicon glyphicon-globe"></span> <a href="#">Web designing -corporate & Domestic</a> </li>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-3">
+
+                <h3><span class="glyphicon glyphicon-briefcase"></span> Career</h3>
+                <ul class="list-group list-unstyled">
+
+                    <li><span class="glyphicon glyphicon-music"></span> <a href="#">Musical & Dance</a> </li>
+                    <li><span class="glyphicon glyphicon-book"></span>  <a href="#">Summar training</a></li>
+                    <li><span class="glyphicon glyphicon-globe"></span>    <a href="#">Website Designing</a></li>
+
+                </ul>
+            </div>
+
+            <div style="clear:both"></div>
+
+
+        </div>
+
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
